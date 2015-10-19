@@ -11,7 +11,48 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151019140221) do
+ActiveRecord::Schema.define(version: 20151019150510) do
+
+  create_table "parents", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "phone"
+  end
+
+  create_table "referrals", force: :cascade do |t|
+    t.integer "student_id"
+    t.integer "staff_member_id"
+    t.string  "type"
+    t.string  "anecdotal"
+    t.string  "text"
+    t.string  "points"
+    t.string  "integer"
+    t.date    "date"
+    t.boolean "dean"
+    t.integer "period"
+    t.string  "location"
+    t.string  "infractions"
+  end
+
+  create_table "roster_students", force: :cascade do |t|
+    t.string "roster_id"
+    t.string "student_id"
+  end
+
+  create_table "rosters", force: :cascade do |t|
+    t.string "name"
+    t.string "staff_member_id"
+  end
+
+  create_table "schools", force: :cascade do |t|
+    t.string "name"
+    t.string "phone"
+    t.string "address1"
+    t.string "address2"
+    t.string "city"
+    t.string "state"
+    t.string "zip"
+  end
 
   create_table "staffs", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -30,5 +71,16 @@ ActiveRecord::Schema.define(version: 20151019140221) do
 
   add_index "staffs", ["email"], name: "index_staffs_on_email", unique: true
   add_index "staffs", ["reset_password_token"], name: "index_staffs_on_reset_password_token", unique: true
+
+  create_table "student_parents", force: :cascade do |t|
+    t.integer "student_id"
+    t.integer "parent_id"
+  end
+
+  create_table "students", force: :cascade do |t|
+    t.string  "name"
+    t.integer "id_number"
+    t.string  "grade"
+  end
 
 end
